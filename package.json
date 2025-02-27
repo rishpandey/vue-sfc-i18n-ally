@@ -1,23 +1,62 @@
 {
   "name": "vue-sfc-i18n-ally",
-  "displayName": "vue-sfc-i18n-ally",
-  "description": "",
+  "displayName": "Vue SFC i18n Ally",
+  "description": "Extract strings from Vue components into i18n SFC blocks",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rishpandey/vue-sfc-i18n-ally.git"
+  },
   "engines": {
     "vscode": "^1.97.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:vue"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "vue-sfc-i18n-ally.helloWorld",
-        "title": "Hello World"
+        "command": "vue-sfc-i18n-ally.extractStrings",
+        "title": "Extract Strings to i18n Block"
+      },
+      {
+        "command": "vue-sfc-i18n-ally.insertEmptyI18nBlock",
+        "title": "Insert Empty i18n Block"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceLangId == vue",
+          "command": "vue-sfc-i18n-ally.extractStrings",
+          "group": "vue-sfc-i18n"
+        },
+        {
+          "when": "resourceLangId == vue",
+          "command": "vue-sfc-i18n-ally.insertEmptyI18nBlock",
+          "group": "vue-sfc-i18n"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Vue SFC i18n Ally",
+      "properties": {
+        "vue-sfc-i18n-ally.defaultLocale": {
+          "type": "string",
+          "default": "en",
+          "description": "The default locale for i18n blocks"
+        },
+        "vue-sfc-i18n-ally.additionalLocales": {
+          "type": "array",
+          "default": ["ja"],
+          "description": "Additional locales to include in i18n blocks"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
