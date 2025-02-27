@@ -23,7 +23,7 @@ export async function extractStringsCommand() {
     // Transform the strings to i18n format
     const i18nBlock = await transformToI18n(templateStrings, existingI18n);
 
-    // Replace the original strings with {{ $t('key') }}
+    // Replace the original strings with {{ t('key') }}
     const edit = new vscode.WorkspaceEdit();
     // Sort by reverse order of position to avoid range shifting
     const sortedStrings = [...templateStrings].sort((a, b) =>
@@ -35,7 +35,7 @@ export async function extractStringsCommand() {
         edit.replace(
           editor.document.uri,
           str.location,
-          `{{ $t('${str.key}') }}`
+          `{{ t('${str.key}') }}`
         );
       }
     }
